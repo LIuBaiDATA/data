@@ -29,7 +29,7 @@ version = 0.1.0
 
 # (list) Application requirements (comma separated)
 # 核心修改：移除死板的版本号，锁定 Kivy 源码包和适配的 Cython，去掉 pyjnius 的版本限制
-requirements = python3, kivy==2.3.0, cython==3.0.11, pyjnius
+requirements = python3, kivy==2.1.0, pyjnius
 
 # (str) Supported orientation
 orientation = portrait
