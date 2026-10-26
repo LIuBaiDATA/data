@@ -29,7 +29,7 @@ version = 0.1.0
 
 # (list) Application requirements (comma separated)
 # 修改点 1：锁定了 Kivy 2.3.0，并显式加入了匹配的 Cython 3.0.11 解决底层编译崩溃
-requirements = python3,kivy==2.3.0,cython==3.0.11,pyjnius
+requirements = python3==3.10.11, hostpython3==3.10.11, kivy==2.3.0, pyjnius>=1.4.0
 
 # (str) Supported orientation
 orientation = portrait
