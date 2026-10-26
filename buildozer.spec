@@ -1,6 +1,3 @@
-# Shipit OS generated buildozer.spec
-# Edit title / package.name / requirements as needed, then re-run shipit.
-
 [app]
 
 # (str) Title of your application
@@ -28,7 +25,6 @@ source.exclude_dirs = tests, bin, venv, .venv, .git, .github, dist, build, __pyc
 version = 0.1.0
 
 # (list) Application requirements (comma separated)
-# 核心修改：移除死板的版本号，锁定 Kivy 源码包和适配的 Cython，去掉 pyjnius 的版本限制
 requirements = python3, kivy==2.1.0, pyjnius
 
 # (str) Supported orientation
@@ -46,9 +42,7 @@ android.minapi = 24
 android.ndk = 25b
 android.accept_sdk_license = True
 
-# 只保留 64 位架构，避免旧版编译工具链报错
 android.archs = arm64-v8a
-
 android.logcat_filters = *:S python:D
 
 #------------------------------------------------------------------------------
