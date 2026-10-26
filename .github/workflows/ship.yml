@@ -16,9 +16,9 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.10'
 
-      - name: Install System Dependencies (Fix SDL2 Error)
+      - name: Install System Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip \
@@ -28,27 +28,18 @@ jobs:
           libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev \
           automake autoconf-archive
 
-      - name: Cache Buildozer Data
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.buildozer
-            ./.buildozer
-          key: ${{ runner.os }}-buildozer-${{ hashFiles('buildozer.spec') }}
-          restore-keys: |
-            ${{ runner.os }}-buildozer-
-
       - name: Install Buildozer
         run: |
           pip install --upgrade pip
           pip install buildozer cython==0.29.36 virtualenv
 
-      - name: Build APK with Buildozer
+      - name: Build APK
         run: |
           export BUILDOZER_WARN_ON_ROOT=1
+          buildozer android clean
           buildozer -v android debug
 
-      - name: Upload APK Artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Debug-APK
