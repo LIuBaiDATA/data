@@ -28,8 +28,8 @@ source.exclude_dirs = tests, bin, venv, .venv, .git, .github, dist, build, __pyc
 version = 0.1.0
 
 # (list) Application requirements (comma separated)
-# 修改点 1：锁定了 Kivy 2.3.0，并显式加入了匹配的 Cython 3.0.11 解决底层编译崩溃
-requirements = python3==3.10.11, hostpython3==3.10.11, kivy==2.3.0, pyjnius>=1.4.0
+# 核心修改：移除死板的版本号，锁定 Kivy 源码包和适配的 Cython，去掉 pyjnius 的版本限制
+requirements = python3, kivy==2.3.0, cython==3.0.11, pyjnius
 
 # (str) Supported orientation
 orientation = portrait
@@ -46,7 +46,7 @@ android.minapi = 24
 android.ndk = 25b
 android.accept_sdk_license = True
 
-# 修改点 2：只保留 64 位架构，避免旧版编译工具链报错
+# 只保留 64 位架构，避免旧版编译工具链报错
 android.archs = arm64-v8a
 
 android.logcat_filters = *:S python:D
