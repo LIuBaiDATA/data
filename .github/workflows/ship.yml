@@ -1,4 +1,4 @@
-name: Shipit Cloud Build
+name: Build Kivy APK
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-apk:
-    runs-on: ubuntu-22.04 # 强制使用 22.04 版本，保留 libtinfo5，避开 24.04 的坑
+    runs-on: ubuntu-22.04
     timeout-minutes: 180
     steps:
       - name: Checkout
@@ -21,7 +21,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3-pip build-essential git python3-dev openjdk-17-jdk zip unzip ccache libffi-dev libssl-dev
+          sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
 
       - name: Install Buildozer
         run: |
@@ -33,15 +33,9 @@ jobs:
           export BUILDOZER_WARN_ON_ROOT=1
           buildozer -v android debug
 
-      - name: Show APK outputs
-        if: always()
-        run: |
-          ls -la bin/ 2>/dev/null || echo "(no bin yet)"
-          find . -name "*.apk" 2>/dev/null || true
-
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: apk
           path: bin/*.apk
-          if-no-files-found: warn
+          if-no-files-found: error
